@@ -40,5 +40,4 @@ public class SetupTestUsers {
         em.persist(both);
         em.getTransaction().commit();
     }
-
 }
