@@ -29,6 +29,7 @@ public class GuideFacade {
             em.close();
         }
     }
+    //henter alle guides ud fra DB
     public List<GuideDTO> getAllGuides(){
         EntityManager em = getEntityManager();
         try{

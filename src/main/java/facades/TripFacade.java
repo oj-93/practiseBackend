@@ -7,10 +7,9 @@ import utils.EMF_Creator;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-import java.time.LocalDateTime;
 import java.util.List;
 
-public class TripFacade {
+public class TripFacade{
     private static EntityManagerFactory emf;
     private static TripFacade instance;
 //creater trips og persister dem ned i DB

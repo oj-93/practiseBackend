@@ -1,9 +1,7 @@
 package entities;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.List;
+
 
 @Entity
 public class Trip {

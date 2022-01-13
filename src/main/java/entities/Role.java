@@ -5,9 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @author Plaul
- */
+
 @Entity
 @Table(name = "roles")
 public class Role implements Serializable {

@@ -10,18 +10,16 @@ import utils.EMF_Creator;
 
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("guides")
 public class GuideResource {
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     private static final GuideFacade FACADE = GuideFacade.getGuideFacade(EMF);
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Path("createGuide")
     @POST
@@ -32,5 +30,14 @@ public class GuideResource {
         System.out.println(guideDTO);
         GuideDTO guide = FACADE.createGuide(guideDTO);
         return Response.ok(guide).build();
+    }
+
+    @Path("all_guides")
+    @GET
+    @RolesAllowed("user")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAllGuides() {
+        List<GuideDTO> list = FACADE.getAllGuides();
+        return gson.toJson(list);
     }
 }
