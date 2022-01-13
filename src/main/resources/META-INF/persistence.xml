@@ -24,7 +24,7 @@
 
             <!-- In PRODUCTION the values below, will be overriden by utils.EMF_Creator -->
             <property name="javax.persistence.jdbc.url"
-                      value="jdbc:mysql://68.183.71.200:3306/boats?serverTimezone=UTC"/>
+                      value="jdbc:mysql://68.183.71.200:3306/eksamen?serverTimezone=UTC"/>
             <property name="javax.persistence.jdbc.user" value="oliver"/>
             <property name="javax.persistence.jdbc.password" value="O!iver123"/>
 
@@ -42,7 +42,7 @@
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="eclipselink.canonicalmodel.subpackage" value="ghy636765"/>
             <property name="javax.persistence.jdbc.url"
-                      value="jdbc:mysql://localhost:3306/boats_test?serverTimezone=UTC"/>
+                      value="jdbc:mysql://localhost:3306/eksamen_test?serverTimezone=UTC"/>
             <property name="javax.persistence.jdbc.user" value="dev"/>
             <property name="javax.persistence.jdbc.password" value="ax2"/>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
