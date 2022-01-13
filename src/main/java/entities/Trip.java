@@ -1,11 +1,10 @@
 package entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
+
 @Entity
 public class Trip {
     @Id
@@ -17,6 +16,8 @@ public class Trip {
     private String location;
     private String duration;
     private String packingList;
+    @ManyToOne
+    private Guide guide;
 
     public Trip() {
     }
@@ -29,6 +30,14 @@ public class Trip {
         this.location = location;
         this.duration = duration;
         this.packingList = packingList;
+    }
+
+    public Guide getGuide(){
+        return guide;
+    }
+
+    public void setGuide(Guide guide){
+        this.guide = guide;
     }
 
     public String getName() {
@@ -51,6 +60,8 @@ public class Trip {
     public String getTime() {
         return time;
     }
+
+
 
     public void setTime(String time) {
         this.time = time;

@@ -1,9 +1,8 @@
 package entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Guide {
@@ -15,6 +14,8 @@ public class Guide {
     private String birthYear;
     private String profile;
     private String imageURL;
+    @OneToMany(mappedBy = "guide", cascade = CascadeType.PERSIST)
+    private List<Trip> trips;
 
     public Guide() {
     }
@@ -25,6 +26,14 @@ public class Guide {
         this.birthYear = birthYear;
         this.profile = profile;
         this.imageURL = imageURL;
+        this.trips = new ArrayList<>();
+    }
+
+    public  void addTrip(Trip trip){
+        if(trip != null){
+            this.trips.add(trip);
+            trip.setGuide(this);
+        }
     }
 
     public String getProfile() {
