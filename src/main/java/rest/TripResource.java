@@ -20,7 +20,7 @@ public class TripResource {
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
 
     private static final TripFacade FACADE = TripFacade.getTripFacade(EMF);
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 
     @Path("all_trips")
@@ -29,7 +29,7 @@ public class TripResource {
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllTrips() {
         List<TripDTO> list = FACADE.getAllTrips();
-        return GSON.toJson(list);
+        return gson.toJson(list);
     }
 
     @Path("createTrip")
@@ -42,4 +42,14 @@ public class TripResource {
         System.out.println(tripDTO);
         return Response.ok(trip).build();
     }
+
+    @Path("{id}")
+    @DELETE
+    @RolesAllowed("admin")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteTrip(@PathParam("id") long id){
+        FACADE.deleteTrip(id);
+        return Response.status(Response.Status.ACCEPTED).build();
+    }
+
 }

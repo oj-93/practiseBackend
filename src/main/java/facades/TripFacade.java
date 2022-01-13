@@ -59,6 +59,20 @@ public class TripFacade {
             em.close();
         }
     }
+
+    public TripDTO deleteTrip(long id){
+        EntityManager em = emf.createEntityManager();
+        Trip trip = em.find(Trip.class, id);
+        try{
+            em.getTransaction().begin();
+            em.createNativeQuery("DELETE FROM TRIP WHERE id =?").setParameter(1, trip.getId()).executeUpdate();
+            em.remove(trip);
+            em.getTransaction().commit();
+            return new TripDTO(trip);
+        }finally {
+            em.close();
+        }
+    }
     //manager til at holde styr på hvad der bliver sendt til databasen og hvad der bliver sendt tilbage
     private EntityManager getEntityManager(){
         return emf.createEntityManager();

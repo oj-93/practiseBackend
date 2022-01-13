@@ -10,7 +10,6 @@ import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
@@ -19,7 +18,7 @@ public class TripFacadeTest {
     private static EntityManagerFactory emf;
     private static EntityManager em;
     private static TripFacade tripFacade;
-    private Trip t1,t2,t3;
+    private static Trip t1,t2,t3;
 
     @BeforeAll
     public static void setUpClass() {
@@ -59,6 +58,13 @@ public class TripFacadeTest {
     public void getAllTrips(){
         List<TripDTO> allTrips = tripFacade.getAllTrips();
         assertEquals(3,allTrips.size());
+    }
+
+   @Test
+    public void deleteTrip(){
+        tripFacade.deleteTrip(t1.getId());
+        List<TripDTO> tripDTOList = tripFacade.getAllTrips();
+        assertEquals(2, tripDTOList.size());
     }
 
     @Test
