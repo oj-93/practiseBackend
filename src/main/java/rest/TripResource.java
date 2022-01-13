@@ -25,9 +25,8 @@ public class TripResource {
 
     @Path("all_trips")
     @GET
-    @RolesAllowed("user")
     @Produces({MediaType.APPLICATION_JSON})
-    public String getAllOwners() {
+    public String getAllTrips() {
         List<TripDTO> list = FACADE.getAllTrips();
         return GSON.toJson(list);
     }
