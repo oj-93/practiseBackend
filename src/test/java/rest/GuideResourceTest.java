@@ -1,5 +1,6 @@
 package rest;
 
+import entities.Guide;
 import entities.Role;
 import entities.Trip;
 import entities.User;
@@ -21,11 +22,11 @@ import java.time.LocalDateTime;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 
-public class TripResourceTest {
+public class GuideResourceTest {
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
-    private Trip t1, t2, t3;
+    private Guide g1, g2, g3;
 
     private static HttpServer httpServer;
     private static EntityManagerFactory emf;
@@ -87,12 +88,12 @@ public class TripResourceTest {
         User both = new User("user_admin", "test3");
         both.addRole(userRole);
         both.addRole(adminRole);
-        t1 = new Trip("test5", "10/01","12:00","testLok5","50 min","gode humør, sokker");
-        t2 = new Trip("test6", "10/01","12:00","testLok6","50 min","gode humør, sokker");
-        t3 = new Trip("test7", "10/01","12:00","testLok7","50 min","gode humør, sokker");
-        em.persist(t1);
-        em.persist(t2);
-        em.persist(t3);
+        g1 = new Guide("Test1","Male","1973","asd","asd");
+        g2 = new Guide("Test2","Male","2000","adsd","afsd");
+        g3 = new Guide("Test3","Male","2020","afsd","asgd");
+        em.persist(g1);
+        em.persist(g2);
+        em.persist(g3);
         em.persist(userRole);
         em.persist(adminRole);
         em.persist(user);
@@ -116,38 +117,25 @@ public class TripResourceTest {
     }
 
     @Test
-    void getAllTrips() {
-        login("user", "test1");
-        given()
-                .contentType("application/json")
-                .accept(ContentType.JSON)
-                .header("x-access-token", securityToken)
-                .when()
-                .get("/trips/all_trips").then()
-                .statusCode(200)
-                .body("size()", is(3));
-    }
-
-    @Test
-    void createTrip() {
+    void createGuide() {
         login("admin", "test2");
-        String createdTripPost = "{\n" +
-                "   \"name\": \"testName\", \n" +
-                "   \"date\": \"2022-12-12\", \n" +
-                "   \"time\": \"10:35\", \n" +
-                "   \"location\": \"testLocation\", \n" +
-                "   \"duration\": 30, \n" +
-                "   \"packingList\": \"sko,sokker,slik\"\n" +
+        String createdGuide = "{\n" +
+                "   \"name\": \"Søren\", \n" +
+                "   \"gender\": \"male\", \n" +
+                "   \"birthYear\": \"1999\", \n" +
+                "   \"profile\": \"siuuuu\", \n" +
+                "   \"imageURL\": \"omajdfafuasf\" \n" +
                 "}";
         given()
 
                 .contentType("application/json")
                 .header("x-access-token", securityToken)
-                .body(createdTripPost)
-                .post("/trips/createTrip").then()
+                .body(createdGuide)
+                .post("/guides/createGuide").then()
                 .assertThat()
                 .statusCode(200)
-                .body("name", is("testName"));
+                .body("gender", is("male"));
     }
-    }
+}
+
 

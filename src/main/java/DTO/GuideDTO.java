@@ -1,14 +1,12 @@
-package entities;
+package DTO;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import entities.Guide;
+import entities.Trip;
 
-@Entity
-public class Guide {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import java.util.ArrayList;
+import java.util.List;
+
+public class GuideDTO {
     private long id;
     private String name;
     private String gender;
@@ -16,16 +14,35 @@ public class Guide {
     private String profile;
     private String imageURL;
 
-    public Guide() {
-    }
-
-    public Guide(String name, String gender, String birthYear, String profile, String imageURL) {
+    public GuideDTO(String name, String gender, String birthYear, String profile, String imageURL) {
         this.name = name;
         this.gender = gender;
         this.birthYear = birthYear;
         this.profile = profile;
         this.imageURL = imageURL;
     }
+
+    public GuideDTO(Guide guide){
+        this.id = guide.getId();
+        this.name = guide.getName();
+        this.gender = guide.getGender();
+        this.birthYear = guide.getBirthYear();
+        this.profile = guide.getProfile();
+        this.imageURL = guide.getImageURL();
+    }
+
+    public GuideDTO() {
+    }
+
+    public static List<GuideDTO> convertingGuideList(List<Guide> guide){
+        List<GuideDTO> guideDTO = new ArrayList<>();
+        if (guide != null){
+            guide.forEach(guideEntity -> guideDTO.add(new GuideDTO(guideEntity)));
+        }
+        return guideDTO;
+    }
+
+
 
     public String getProfile() {
         return profile;
