@@ -34,7 +34,7 @@ public class GuideResource {
 
     @Path("all_guides")
     @GET
-    @RolesAllowed("user")
+    @RolesAllowed({"user","admin"})
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllGuides() {
         List<GuideDTO> list = FACADE.getAllGuides();
