@@ -32,6 +32,9 @@ public class TripFacadeTest {
     @BeforeEach
     public void setUp() {
         em = emf.createEntityManager();
+        em.createQuery("DELETE FROM Trip").executeUpdate();
+        em.createQuery("DELETE FROM Role").executeUpdate();
+        em.createQuery("DELETE FROM User").executeUpdate();
          t1 = new Trip("Test","17/03","20:30","testLok1","20 min","sko, handsker");
          t2 = new Trip("test2", "10/01","12:00","testLok2","60 min","gode humør, sokker");
          t3 = new Trip("test3", "10/01","12:00","testLok3","50 min","gode humør, sokker");
@@ -46,6 +49,8 @@ public class TripFacadeTest {
         //Clean up database after test is done or use a persistence unit with drop-and-create to start up clean on every test
         em.getTransaction().begin();
         em.createQuery("DELETE FROM Trip").executeUpdate();
+        em.createQuery("DELETE FROM Role").executeUpdate();
+        em.createQuery("DELETE FROM User").executeUpdate();
         em.getTransaction().commit();
         em.close();
     }

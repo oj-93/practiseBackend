@@ -61,6 +61,8 @@ public class TripResourceTest {
         //Clean up database after test is done or use a persistence unit with drop-and-create to start up clean on every test
         em.getTransaction().begin();
         em.createQuery("DELETE FROM Trip").executeUpdate();
+        em.createQuery("DELETE FROM Role").executeUpdate();
+        em.createQuery("DELETE FROM User").executeUpdate();
         em.getTransaction().commit();
         em.close();
     }
@@ -72,6 +74,8 @@ public class TripResourceTest {
         em = emf.createEntityManager();
         em.getTransaction().begin();
         em.createQuery("DELETE FROM Trip").executeUpdate();
+        em.createQuery("DELETE FROM Role").executeUpdate();
+        em.createQuery("DELETE FROM User").executeUpdate();
         Role userRole = new Role("user");
         Role adminRole = new Role("admin");
         User user = new User("user", "test1");
