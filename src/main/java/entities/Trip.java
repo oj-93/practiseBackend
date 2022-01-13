@@ -12,17 +12,20 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private LocalDateTime date;
+    private String date;
+    private String time;
     private String location;
-    private int duration;
+    private String duration;
     private String packingList;
 
     public Trip() {
     }
 
-    public Trip(String name, LocalDateTime date, String location, int duration, String packingList) {
+
+    public Trip(String name, String date, String time, String location, String duration, String packingList) {
         this.name = name;
         this.date = date;
+        this.time = time;
         this.location = location;
         this.duration = duration;
         this.packingList = packingList;
@@ -36,12 +39,21 @@ public class Trip {
         this.name = name;
     }
 
-    public LocalDateTime getDate() {
+
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getLocation() {
@@ -52,11 +64,11 @@ public class Trip {
         this.location = location;
     }
 
-    public int getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 

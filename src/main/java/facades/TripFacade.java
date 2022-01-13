@@ -20,14 +20,28 @@ public class TripFacade {
         EntityManager em = emf.createEntityManager();
         try{
 
-            Trip t1 = new Trip("Turen rundt", LocalDateTime.of(2022,2,20,18,00),"København",20,"sko, handsker");
-            Trip t2 = new Trip("Turen af alle ture", LocalDateTime.of(2022,5,23,12,30),"København",60,"gode humør, sokker");
+            Trip t1 = new Trip("Turen rundt","17/03","20:30","København","20 min","sko, handsker");
+            Trip t2 = new Trip("Turen af alle ture", "10/01","12:00","København","2 timer","gode humør, sokker");
 
             em.getTransaction().begin();
             em.persist(t1);
             em.persist(t2);
             em.getTransaction().commit();
         }finally{
+            em.close();
+        }
+    }
+    //create Trip
+    public TripDTO createTrip (TripDTO tripDTO){
+        EntityManager em = emf.createEntityManager();
+        Trip trip = new Trip("KronborgTours","17/04","10:10","Helsingør","50 min","sko,hat,lygte");
+
+        try{
+            em.getTransaction().begin();
+            em.persist(trip);
+            em.getTransaction().commit();
+            return new TripDTO(trip);
+        }finally {
             em.close();
         }
     }

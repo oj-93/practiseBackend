@@ -81,9 +81,9 @@ public class TripResourceTest {
         User both = new User("user_admin", "test3");
         both.addRole(userRole);
         both.addRole(adminRole);
-        t1 = new Trip("Test tur1", LocalDateTime.of(2022,2,20,18,00),"Test location",20,"Test,test,test");
-        t2 = new Trip("Test tur2", LocalDateTime.of(2022,2,20,18,00),"Test location2",45,"test1,test2");
-        t3 = new Trip("Test tur3", LocalDateTime.of(2022,2,20,18,00),"Test location",35,"test3, test4");
+        t1 = new Trip("test5", "10/01","12:00","testLok5","50 min","gode humør, sokker");
+        t2 = new Trip("test6", "10/01","12:00","testLok6","50 min","gode humør, sokker");
+        t3 = new Trip("test7", "10/01","12:00","testLok7","50 min","gode humør, sokker");
         em.persist(t1);
         em.persist(t2);
         em.persist(t3);
@@ -121,4 +121,27 @@ public class TripResourceTest {
                 .statusCode(200)
                 .body("size()", is(3));
     }
-}
+
+    @Test
+    void createTrip() {
+        login("admin", "test2");
+        String createdTripPost = "{\n" +
+                "   \"name\": \"testName\", \n" +
+                "   \"date\": \"2022-12-12\", \n" +
+                "   \"time\": \"10:35\", \n" +
+                "   \"location\": \"testLocation\", \n" +
+                "   \"duration\": 30, \n" +
+                "   \"packingList\": \"sko,sokker,slik\"\n" +
+                "}";
+        given()
+
+                .contentType("application/json")
+                .header("x-access-token", securityToken)
+                .body(createdTripPost)
+                .post("/trips/createTrip").then()
+                .assertThat()
+                .statusCode(200)
+                .body("name", is("testName"));
+    }
+    }
+

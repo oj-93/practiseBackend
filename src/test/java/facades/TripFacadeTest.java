@@ -32,12 +32,10 @@ public class TripFacadeTest {
     @BeforeEach
     public void setUp() {
         em = emf.createEntityManager();
-        t1 = new Trip("Test tur1", LocalDateTime.of(2022,2,20,18,00),"Test location",20,"Test,test,test");
-        t2 = new Trip("Test tur2", LocalDateTime.of(2022,2,20,18,00),"Test location2",45,"test1,test2");
-        t3 = new Trip("Test tur3", LocalDateTime.of(2022,2,20,18,00),"Test location",35,"test3, test4");
-
-
-        em.getTransaction().begin();
+         t1 = new Trip("Test","17/03","20:30","testLok1","20 min","sko, handsker");
+         t2 = new Trip("test2", "10/01","12:00","testLok2","60 min","gode humør, sokker");
+         t3 = new Trip("test3", "10/01","12:00","testLok3","50 min","gode humør, sokker");
+         em.getTransaction().begin();
         em.persist(t1);
         em.persist(t2);
         em.persist(t3);
@@ -56,7 +54,15 @@ public class TripFacadeTest {
     public void getAllTrips(){
         List<TripDTO> allTrips = tripFacade.getAllTrips();
         assertEquals(3,allTrips.size());
+    }
 
+    @Test
+    public void createTrip(){
+         Trip t4 = new Trip("test4", "10/01","12:00","testLok4","50 min","gode humør, sokker");
+         em.getTransaction().begin();
+        em.persist(t4);
+        em.getTransaction().commit();
+        assertEquals(4, tripFacade.getAllTrips().size());
     }
 
 }

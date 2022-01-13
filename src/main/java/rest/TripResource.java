@@ -7,12 +7,12 @@ import com.google.gson.GsonBuilder;
 import facades.TripFacade;
 import utils.EMF_Creator;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("trips")
@@ -30,5 +30,15 @@ public class TripResource {
     public String getAllOwners() {
         List<TripDTO> list = FACADE.getAllTrips();
         return GSON.toJson(list);
+    }
+
+    @Path("createTrip")
+    @POST
+    @RolesAllowed("admin")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response createTrip(TripDTO tripDTO){
+        TripDTO trip = FACADE.createTrip(tripDTO);
+        return Response.ok(trip).build();
     }
 }
