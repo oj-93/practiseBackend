@@ -39,6 +39,7 @@ public class TripResource {
     @Consumes({MediaType.APPLICATION_JSON})
     public Response createTrip(TripDTO tripDTO){
         TripDTO trip = FACADE.createTrip(tripDTO);
+        System.out.println(tripDTO);
         return Response.ok(trip).build();
     }
 }

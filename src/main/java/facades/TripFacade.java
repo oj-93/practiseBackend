@@ -34,7 +34,7 @@ public class TripFacade {
     //create Trip
     public TripDTO createTrip (TripDTO tripDTO){
         EntityManager em = emf.createEntityManager();
-        Trip trip = new Trip("KronborgTours","17/04","10:10","Helsingør","50 min","sko,hat,lygte");
+        Trip trip = new Trip(tripDTO.getName(), tripDTO.getDate(),tripDTO.getTime(),tripDTO.getLocation(),tripDTO.getDuration(),tripDTO.getPackingList());
 
         try{
             em.getTransaction().begin();
